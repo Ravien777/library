@@ -6,8 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
+    <header>
+      <div class="mobile">
+        <a href="javascript:void(0)" class="dashboard-menu" id="toggleMenu">
+          <i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>
+        </a>
+        <a href="" class="logo">
+          <img src="assets/Library_Logo-transparent.png" alt="Logo" />
+        </a>
+        <a href="">
+          <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="mobile-nav">
+        <nav>
+          <ul class="menu-items">
+            <li class="menu-item active">
+              <a href="books.html" class="menu-link"
+                >Books <i class="fa fa-angle-right" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="menu-item">
+              <a href="users.html" class="menu-link"
+                >Users <i class="fa fa-angle-right" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="menu-item">
+              <a href="settings.html" class="menu-link"
+                >Settings <i class="fa fa-angle-right" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="menu-item">
+              <a href="index.html" class="menu-link"
+                >View site <i class="fa fa-angle-right" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="menu-item">
+              <a href="#" class="menu-link"
+                >Log out <i class="fa fa-angle-right" aria-hidden="true"></i
+              ></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="container">
+        <a href="javscript:void(0)" class="add-book"> + Add Book </a>
+        <div class="book-list" id="bookList"></div>
+      </section>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
