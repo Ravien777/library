@@ -1,9 +1,9 @@
 const toggleMenuBtn = document.getElementById("toggleMenu");
 const mobileMenu = document.querySelector(".mobile-nav");
 const books_list = document.getElementById("bookList");
-const addBookModal = document.getElementById("");
-const addBookForm = document.getElementById("");
-const addBookBtn = document.getElementById("");
+const addBookModal = document.getElementById("addBookModal");
+const addBookForm = document.getElementById("addBookForm");
+const addBookBtn = document.getElementById("AddBookBtn");
 const errorMsg = document.getElementById("errorMsg");
 const overlay = document.getElementById("overlay");
 
@@ -34,9 +34,7 @@ class Library {
   }
 
   addBook(newBook) {
-    if (!this.IsInLibrary(newBook)) {
-      this.books.push(newBook);
-    }
+    this.books.push(newBook);
   }
 
   removeBook(title) {
@@ -64,24 +62,24 @@ const createBookDiv = (book) => {
   const book_div_bottom_wrap = document.createElement("div");
   const bottom_p_author = document.createElement("p");
   const bottom_p_pages = document.createElement("p");
-  const remove_book_a = document.createElement("a");
+  const remove_book = document.createElement("button");
 
   book_div.className = "book";
   book_div_top.className = "top";
-  bg_img.src = book.cover;
   bg_img.alt = "Book Cover";
   book_div_bottom.className = "bottom";
   bottom_h3.className = "title";
   book_div_bottom_wrap.className = "wrap";
   bottom_p_author.className = "author";
   bottom_p_pages.className = "pages";
-  remove_book_a.href = "javascript:void(0)";
-  remove_book_a.className = "remove-book";
+  remove_book.className = "remove-book";
 
   bottom_h3.innerText = book.title;
   bottom_p_author.innerText = book.author;
   bottom_p_pages.innerText = book.pages;
-  remove_book_a.innerText = "Remove";
+  bg_img.src = book.cover;
+  remove_book.innerText = "Remove";
+  remove_book.onclick = removeBook;
 
   book_div_top.appendChild(bg_img);
   book_div_bottom_wrap.appendChild(bottom_p_author);
@@ -89,9 +87,11 @@ const createBookDiv = (book) => {
   bottom_anchor.appendChild(bottom_h3);
   bottom_anchor.appendChild(book_div_bottom_wrap);
   book_div_bottom.appendChild(bottom_anchor);
-  book_div_bottom.appendChild(remove_book_a);
+  book_div_bottom.appendChild(remove_book);
   book_div.appendChild(book_div_top);
   book_div.appendChild(book_div_bottom);
+
+  books_list.append(book_div);
 };
 
 const openAddBookModal = () => {
@@ -123,15 +123,16 @@ const updateBooksGrid = () => {
 };
 
 const resetBooksGrid = () => {
-  booksGrid.innerHTML = "";
+  books_list.innerHTML = "";
 };
 
 const getBookFromInput = () => {
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
-  const isRead = document.getElementById("isRead").checked;
-  return new Book(title, author, pages, isRead);
+  const cover = document.getElementById("book_cover").value;
+  const summary = document.getElementById("summary").value;
+  return new Book(title, author, pages, cover, summary);
 };
 
 const addBook = (e) => {
@@ -144,28 +145,20 @@ const addBook = (e) => {
     return;
   }
 
-  if (auth.currentUser) {
-    addBookDB(newBook);
-  } else {
-    library.addBook(newBook);
-    saveLocal();
-    updateBooksGrid();
-  }
+  library.addBook(newBook);
 
+  updateBooksGrid();
   closeAddBookModal();
 };
 
 const removeBook = (e) => {
-  const title = e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll(
-    '"',
-    ""
-  );
+  const title = e.target.parentNode.firstChild.firstChild.innerText;
 
-  if (auth.currentUser) {
-    removeBookDB(title);
-  } else {
-    library.removeBook(title);
-    saveLocal();
-    updateBooksGrid();
-  }
+  library.removeBook(title);
+  updateBooksGrid();
 };
+
+addBookBtn.onclick = openAddBookModal;
+overlay.onclick = closeAllModals;
+addBookForm.onsubmit = addBook;
+window.onkeydown = handleKeyboardInput;

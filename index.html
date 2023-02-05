@@ -59,10 +59,60 @@
     </header>
     <main>
       <section class="container">
-        <a href="javscript:void(0)" class="add-book"> + Add Book </a>
+        <button type="button" class="add-book" id="AddBookBtn">
+          + Add Book
+        </button>
         <div class="book-list" id="bookList"></div>
       </section>
     </main>
+    <div class="modal" id="addBookModal">
+      <form class="add-book-form" id="addBookForm">
+        <h3>Add new book</h3>
+        <input
+          class="input"
+          type="text"
+          id="title"
+          placeholder="Title"
+          required
+          maxlength="100"
+        />
+        <p class="error-msg" id="errorMsg"></p>
+        <input
+          class="input"
+          type="text"
+          id="author"
+          placeholder="Author"
+          required
+          maxlength="100"
+        />
+        <input
+          class="input"
+          type="number"
+          id="pages"
+          placeholder="Pages"
+          required
+          max="10000"
+        />
+        <input
+          type="url"
+          name="book_cover"
+          id="book_cover"
+          placeholder="Book Cover URL"
+          class="input"
+        />
+        <textarea
+          name="summary"
+          id="summary"
+          class="input"
+          cols="30"
+          rows="5"
+          placeholder="Add book summary..."
+          draggable="true"
+        ></textarea>
+        <button class="btn btn-add" type="submit">Add Book</button>
+      </form>
+    </div>
+    <div class="overlay" id="overlay"></div>
     <script src="main.js"></script>
   </body>
 </html>
