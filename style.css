@@ -146,6 +146,8 @@ main {
   border: 1px solid rgb(222, 222, 222);
   transition: all 0.3s step-end;
   padding: 1rem;
+  max-width: 400px;
+  height: 100%;
 }
 
 .book:hover {
@@ -162,6 +164,7 @@ main {
 .book .top img {
   height: 100%;
   width: auto;
+  max-width: calc(300px - 2rem);
 }
 
 .book .bottom {
@@ -169,6 +172,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  height: calc(100% - 400px);
 }
 
 .book .bottom a {
@@ -185,6 +189,8 @@ main {
   padding: 0.5rem 1rem;
   border-radius: 10px;
   text-transform: uppercase;
+  margin-top: auto;
+  margin-bottom: 0;
 }
 
 .remove-book:hover {
