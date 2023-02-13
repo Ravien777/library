@@ -7,6 +7,7 @@
 body {
   width: 100%;
   font-family: "Poppins", sans-serif;
+  position: relative;
 }
 
 header .mobile {
@@ -16,7 +17,6 @@ header .mobile {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 }
 
 .logo img {
@@ -31,7 +31,7 @@ header .mobile i.fa {
 .mobile-nav {
   position: absolute;
   z-index: 6;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 66.3167px);
   width: 100%;
   background-color: #fff;
   left: -100%;
@@ -85,7 +85,7 @@ header .mobile i.fa {
   justify-content: space-between;
 }
 
-.menu-item:nth-child(4) {
+.menu-item:nth-child(3) {
   margin-bottom: auto;
 }
 
@@ -101,12 +101,23 @@ header .mobile i.fa {
   border-color: rgb(212, 210, 142);
 }
 
+.menu-item span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu-item svg {
+  width: 1.3rem;
+  height: auto;
+}
+
 main {
   display: flex;
   justify-content: center;
 }
 
-.container {
+.content {
   width: 100%;
   padding: 1rem;
   display: flex;
@@ -148,6 +159,10 @@ main {
   padding: 1rem;
   max-width: 400px;
   height: 100%;
+}
+
+.book .title {
+  word-wrap: break-word;
 }
 
 .book:hover {
@@ -273,4 +288,46 @@ main {
 
 .overlay.active {
   display: block;
+}
+
+@media screen and (min-width: 800px) {
+  body {
+    overflow: hidden;
+  }
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+      "site-header site-header  site-header  site-header "
+      "site-nav  site-content site-content site-content";
+  }
+  header {
+    grid-area: site-header;
+  }
+
+  .mobile-nav {
+    position: unset;
+    z-index: unset;
+    background-color: #4e7a79;
+    grid-area: site-nav;
+  }
+
+  .dashboard-menu {
+    display: none;
+  }
+
+  .menu-item:not(:last-child) {
+    border-color: #fff;
+  }
+
+  .menu-link {
+    color: #fff;
+  }
+
+  main {
+    grid-area: site-content;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+  }
 }
